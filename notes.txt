@@ -1,0 +1,93 @@
+
+--------------------- MANUAL WAY OF CONNECTING TO MONGO DB ---------------------
+
+		MongoClient mongoClient = MongoClients.create("mongodb+srv://admin:admin@expensecluster.bprlv.mongodb.net/ExpenseDB?retryWrites=true&w=majority");
+		MongoDatabase database = mongoClient.getDatabase("ExpenseDB");
+		MongoCollection<Document> table = database.getCollection("table");
+		FindIterable<Document> results =  table.find();
+		Document item = table.find().first();
+
+//		 Insert One
+		Document entry1 = new Document("_id", new ObjectId());
+		entry1.append("item", "Pizza Hut");
+		table.insertOne(entry1);
+
+//		 Insert Many
+		List<Document> entryN = new ArrayList<>();
+		entryN.add(new Document().append("item", "Radio"));
+		entryN.add(new Document().append("item", "iphone 13"));
+		entryN.add(new Document().append("item", "spiderman movie"));
+		table.insertMany(entryN);
+
+
+		System.out.println("-----");
+		results.forEach(it -> System.out.println(it.toJson()));
+
+		System.out.println("-----");
+		assert item != null;
+		System.out.println(item.toJson());
+		System.out.println("-----");
+
+--------------------- MANUAL WAY OF USING COMMANDLINERUNNER ---------------------
+
+/*
+	@Bean
+	CommandLineRunner runner(ExpenseRepository repository){
+		System.out.println();
+		System.out.println("****************************************");
+		try{
+			System.out.println("Connection to DB");
+			DB_Connection();
+			System.out.println("SUCCESSFUL DB CONNECTION");
+		}catch (Exception e){
+			System.out.println("FAILED DB CONNECTION");
+		}
+		System.out.println("****************************************");
+		System.out.println();
+		return null;
+	}
+*/
+https://javarevisited.blogspot.com/2018/01/how-to-learn-spring-core-spring-mvc-boot-security-framework.html
+
+Tight cuppling: Using new
+Loose cuppling: One object is not totally dependent on another. It can be replaced.
+Dependency Injection Reference;
+https://www.youtube.com/watch?v=IKD2-MAkXyQ
+
+@Autowired  https://www.baeldung.com/spring-autowire
+ It allows Spring to resolve and inject collaborating beans into our bean.
+Two Types of Dependency Injection: Constructor based and Setter based
+
+@RestController is a specialized version of the controller.
+It includes the @Controller and @ResponseBody annotations,
+and as a result, simplifies the controller implementation:
+
+@RequestMapping https://howtodoinjava.com/spring5/webmvc/controller-getmapping-postmapping/
+Originally, Spring had only @RequestMapping annotation for
+mapping all the incoming HTTP request URLs to the corresponding controller methods.
+
+@GetMapping annotated methods in the @Controller annotated classes
+handle the HTTP GET requests matched with given URI expression.
+
+@PostMapping annotated methods in the @Controller annotated classes
+handle the HTTP POST requests matched with given URI expression.
+
+@RequestBody annotation maps the HttpRequest body to a transfer or domain object, enabling
+automatic deserialization of the inbound HttpRequest body onto a Java object.
+Spring automatically deserializes the JSON into a Java type, assuming an appropriate one is specified.
+By default, the type we annotate with the @RequestBody annotation must correspond
+to the JSON sent from our client-side controller:
+
+@ResponseBody annotation tells a controller that the object returned is automatically
+serialized into JSON and passed back into the HttpResponse object.
+
+@Service indicates that the class is holding the business logic.
+Besides being used in the service layer, there isn't any other special use for this annotation.
+
+
+
+
+
+
+
+
