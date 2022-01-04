@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @CrossOrigin(origins="https://finance-tracker-js.herokuapp.com")
+//@CrossOrigin(origins="http://localhost:3000")
 @RequestMapping("api/expense")
 @RestController
 public class ExpenseController {
